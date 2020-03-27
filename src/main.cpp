@@ -1,5 +1,6 @@
 #include <iostream>
 #include "BazaTestu.hh"
+#include "Statystyka.hh"
 
 using namespace std;
 
@@ -8,7 +9,6 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-    LZespolona Z1, Z2, wynik;
 
   if (argc < 2) {
     cout << endl;
@@ -33,15 +33,43 @@ int main(int argc, char **argv)
   cout << endl;
 
   WyrazenieZesp   WyrZ_PytanieTestowe;
+  LZespolona Odpowiedz, Wynik;
+  Staty Ocena;
+
+  inicjuj_statystyki(Ocena);
 
   while (PobierzNastpnePytanie(&BazaT,&WyrZ_PytanieTestowe)) {
-    cout << " Czesc rzeczywista pierwszego argumentu: ";
-    cout << WyrZ_PytanieTestowe.Arg1.re << endl;
+    cin.clear();
+    cout << " Pytanie: ";
+    WyswietlWyr(WyrZ_PytanieTestowe);
+    cout << " Podaj odpowiedz: ";
+    cin >> Odpowiedz;
+    int i=0;
+    while (i<3/*cin.fail()*/)
+      {
+	cin.clear();
+	cin.ignore(10000, '\n');
+	cerr << "Zly format. Sprobuj jeszcze raz: " <<endl;
+	i++;
+	cout <<i<<endl;
+	cin >> Odpowiedz;
+	}
+    Wynik=Oblicz (WyrZ_PytanieTestowe);
+    if(Wynik==Odpowiedz)
+      {
+	cout << "Poprawna Odpowiedz"<<endl;
+	dodaj_dobra(Ocena);
+      }
+    else
+      {
+	cout <<"ZLA ODPOWIEDZ"<<endl<<" Poprawny wynik to: "<<Wynik<<endl;
+	dodaj_zla(Ocena);
+      }
   }
 
 
   cout << endl;
   cout << " Koniec testu" << endl;
+  Statystyki(Ocena);
   cout << endl;
-
 }

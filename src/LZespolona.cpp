@@ -1,6 +1,8 @@
 #include "LZespolona.hh"
 #include <cmath>
+#include <iostream>
 
+using namespace std;
 
 
 /*!
@@ -35,7 +37,7 @@ istream& operator >> (istream& StrWej, LZespolona& liczba)
 		StrWej.setstate(ios::failbit);
 		return StrWej;
 	}
-
+	
 	StrWej >> liczba.im;
 	if (!StrWej)
 	{
@@ -46,7 +48,7 @@ istream& operator >> (istream& StrWej, LZespolona& liczba)
 	StrWej >> tmp;
 	if  (tmp != 'i')
 	{
-		StrWej.setstate(ios::failbit);
+        	StrWej.setstate(ios::failbit);
 		return StrWej;
 	}
 
@@ -92,7 +94,7 @@ LZespolona  operator * (LZespolona  Skl1,  LZespolona  Skl2)
   return Wynik;
 }
 
-Lzespolona sprzezenie (LZespolona Skl)
+LZespolona sprzezenie(LZespolona Skl)
 {
     Skl.im = - (Skl.im);
     return Skl;
@@ -113,6 +115,13 @@ LZespolona operator / (LZespolona Skl1, LZespolona Skl2)
    Wynik.re = Wynik.re / pow(modul(Skl2),2);
    Wynik.im = Wynik.im / pow(modul(Skl2),2);
    return Wynik;
+}
+bool operator == (LZespolona Skl1, LZespolona Skl2)
+{
+  if(Skl1.re == Skl2.re && Skl1.im == Skl2.im)
+    return true;
+  else
+    return false;
 }
 
 LZespolona Wczytaj()

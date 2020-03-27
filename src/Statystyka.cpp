@@ -1,24 +1,27 @@
 #include "Statystyka.hh"
+#include <iostream>
 
 
-
-double inicjuj_statystyke(Staty TEST)
+Staty inicjuj_statystyki(Staty &TEST)
 {
   TEST.odp_dobra=0;
   TEST.odp_zla=0;
+  return TEST;
 }
 
-double dodaj_dobra(Staty TEST)
+Staty dodaj_dobra(Staty &TEST)
 {
-  TEST.odp_dobra++;
+  ++TEST.odp_dobra;
+  return TEST;
 }
 
-double dodaj_zla(Staty TEST)
+Staty dodaj_zla(Staty &TEST)
 {
-  TEST.odp_zla++;
+  ++TEST.odp_zla;
+  return TEST;
 }
 
-void Wyswiet(Staty TEST)
+void Statystyki(Staty &TEST)
 {
   double Wynik;
   Wynik=(TEST.odp_dobra/(TEST.odp_dobra+TEST.odp_zla))*100;
