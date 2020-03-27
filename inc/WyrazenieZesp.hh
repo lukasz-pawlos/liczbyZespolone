@@ -28,8 +28,14 @@ struct WyrazenieZesp {
  *
  */
 
-
-void Wyswietl(WyrazenieZesp  WyrZ);
+ostream& operator << (ostream& StrWyj, WyrazenieZesp wyr);
+Operator WczytajSymbol();
+void WyswietlSymbol (Operator operatort);
+void WyswietlWyr(WyrazenieZesp  WyrZ);
 LZespolona Oblicz(WyrazenieZesp  WyrZ);
+WyrazenieZesp WczytajWyr ();
+char ZwrocSymbol (Operator operatort);
+Operator WczytajSymbol (char operatort);
+istream& operator >> (istream& StrWej, WyrazenieZesp& wyr);
 
 #endif
