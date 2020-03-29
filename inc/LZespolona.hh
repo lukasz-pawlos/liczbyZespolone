@@ -35,6 +35,7 @@ LZespolona  operator - (LZespolona  Skl1,  LZespolona  Skl2);
 LZespolona  operator * (LZespolona  Skl1,  LZespolona  Skl2);
 LZespolona  operator / (LZespolona  Skl1,  LZespolona  Skl2);
 bool  operator == (LZespolona Skl1,  LZespolona  Skl2);
+bool operator != (LZespolona Skl1, LZespolona Skl2);
 LZespolona Wczytaj();
 istream& operator >> (istream& StrWej, LZespolona& liczba);
 
