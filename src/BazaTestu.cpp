@@ -20,8 +20,12 @@ static WyrazenieZesp  TestLatwy[] =
  * Analogicznie zdefiniuj test "trudne"
  *
  */
-
-
+static WyrazenieZesp TestTrudny[] =
+  { {{8,3}, Op_Dodaj, {-12,4}},
+    {{3,-1}, Op_Odejmij, {-2,1}},
+    {{2,1}, Op_Mnoz, {3,2}},
+    {{1,8}, Op_Dziel, {2,3}},
+  };
 
 
 
@@ -75,6 +79,11 @@ bool InicjalizujTest( BazaTestu  *wskBazaTestu, const char *sNazwaTestu )
 {
   if (!strcmp(sNazwaTestu,"latwy")) {
     UstawTest(wskBazaTestu,TestLatwy,sizeof(TestLatwy)/sizeof(WyrazenieZesp));
+    return true;
+  }
+  
+  if (!strcmp(sNazwaTestu,"trudny")) {
+    UstawTest(wskBazaTestu,TestTrudny,sizeof(TestTrudny)/sizeof(WyrazenieZesp));
     return true;
   }
   /*

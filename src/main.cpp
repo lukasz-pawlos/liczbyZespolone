@@ -39,32 +39,52 @@ int main(int argc, char **argv)
   inicjuj_statystyki(Ocena);
 
   while (PobierzNastpnePytanie(&BazaT,&WyrZ_PytanieTestowe)) {
-    cin.clear();
     cout << " Pytanie: ";
     WyswietlWyr(WyrZ_PytanieTestowe);
     cout << " Podaj odpowiedz: ";
-    cin >> Odpowiedz;
     int i=0;
-    while (i<3/*cin.fail()*/)
+    for(i=0; i<4; i++)
       {
-	cin.clear();
-	cin.ignore(10000, '\n');
-	cerr << "Zly format. Sprobuj jeszcze raz: " <<endl;
-	i++;
-	cout <<i<<endl;
 	cin >> Odpowiedz;
-	}
-    Wynik=Oblicz (WyrZ_PytanieTestowe);
-    if(Wynik==Odpowiedz)
-      {
-	cout << "Poprawna Odpowiedz"<<endl;
-	dodaj_dobra(Ocena);
+	Wynik=Oblicz(WyrZ_PytanieTestowe);
+
+	if(!cin.good() )
+	  {
+	    if(i<3)
+	      {
+		cout<< "Blad formatu liczby zespolonej, sprobuj ponownie"<<endl;
+		cout<< "Twoja odpowiedz: ";
+	      }
+	    else
+	      {
+		dodaj_zla(Ocena);
+		cout <<"ZLA ODPOWIEDZ"<<endl<<" Poprawny wynik to: "<<Wynik<<endl;
+	      }
+	    cin.clear();
+	    cin.ignore(10000,'\n');
+	  }
+	else
+	  {
+	    if(Odpowiedz==Wynik)
+	    {
+	      dodaj_dobra(Ocena);
+	      cout<< "Poprawna odpowiedz"<<endl;
+
+	      break;
+	    }
+	    else
+	      {
+		if(Odpowiedz!=Wynik)
+		  {
+		    dodaj_zla(Ocena);
+		    cout <<"ZLA ODPOWIEDZ"<<endl<<" Poprawny wynik to: "<<Wynik<<endl;
+		    
+		    break;
+		}
+	      }
+	  }
       }
-    else
-      {
-	cout <<"ZLA ODPOWIEDZ"<<endl<<" Poprawny wynik to: "<<Wynik<<endl;
-	dodaj_zla(Ocena);
-      }
+
   }
 
 

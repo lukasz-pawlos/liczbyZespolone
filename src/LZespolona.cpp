@@ -14,7 +14,7 @@ using namespace std;
  *    Sume dwoch skladnikow przekazanych jako parametry.
  */
 
- ostream& operator << (ostream& StrWyj, LZespolona liczba)
+ostream& operator << (ostream& StrWyj, LZespolona liczba)
 {
   StrWyj << "(" << liczba.re << showpos << liczba.im << "i)" << noshowpos;
   return StrWyj;
@@ -89,7 +89,7 @@ LZespolona  operator * (LZespolona  Skl1,  LZespolona  Skl2)
 {
   LZespolona  Wynik;
 
-  Wynik.re = Skl1.im * Skl2.im + Skl1.im * Skl2.im;
+  Wynik.re = Skl1.re * Skl2.re + (-(Skl1.im * Skl2.im));
   Wynik.im = Skl1.re * Skl2.im + Skl1.im * Skl2.re;
   return Wynik;
 }
@@ -111,14 +111,26 @@ double  modul (LZespolona Skl)
 LZespolona operator / (LZespolona Skl1, LZespolona Skl2)
 {
    LZespolona Wynik;
-   Wynik = operator * (Skl1, sprzezenie(Skl2));
-   Wynik.re = Wynik.re / pow(modul(Skl2),2);
-   Wynik.im = Wynik.im / pow(modul(Skl2),2);
-   return Wynik;
+   if(modul(Skl2) != 0)
+     {
+       Wynik = operator * (Skl1, sprzezenie(Skl2));
+       Wynik.re = Wynik.re / pow(modul(Skl2),2);
+       Wynik.im = Wynik.im / pow(modul(Skl2),2);
+       return Wynik;
+     }
+     else
+       cerr << "Nie dzielimy przez 0"<<endl;
 }
 bool operator == (LZespolona Skl1, LZespolona Skl2)
 {
   if(Skl1.re == Skl2.re && Skl1.im == Skl2.im)
+    return true;
+  else
+    return false;
+}
+bool operator != (LZespolona Skl1, LZespolona Skl2)
+{
+  if(Skl1.re != Skl2.re && Skl1.im != Skl2.im)
     return true;
   else
     return false;
